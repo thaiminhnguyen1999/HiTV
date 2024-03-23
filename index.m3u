@@ -1,4 +1,16 @@
 #EXTM3U
 
-#EXTINF:-1 tvg-id="hitvhd" group-title="HiTV" tvg-logo="https://github.com/thaiminhnguyen1999/HiTV/blob/gh-pages/img/logo/HiTV-Logo.png?raw=true", HiTV HD
-https://media-cdn-in.100ms.live/beam/65ab8184672616331ebab163/65ab819d3b1e3ffccbce6f25/20240301/1709303298423/stream_0/stream.m3u8
+#EXTINF:-1 tvg-id="hitvlistchannel" group-title="HiTV" tvg-logo="https://github.com/thaiminhnguyen1999/HiTV/blob/gh-pages/img/logo/HiTV-Logo.png?raw=true", Danh sách kênh nhóm HiTV
+https://raw.githubusercontent.com/thaiminhnguyen1999/HiTV/m3u8/hitv-channel_number_list_(HiTV_group).mp4/Channel-List.m3u8
+
+#EXTINF:-1 tvg-id="hitv1hd" group-title="HiTV" tvg-logo="https://github.com/thaiminhnguyen1999/HiTV/blob/gh-pages/img/logo/hitv1hd-logo.png?raw=true", HiTV 1 HD
+https://raw.githubusercontent.com/thaiminhnguyen1999/HiTV/m3u8/hitv-not_yet_broadcast.mp4/hitv-not_yet_broadcast.m3u8
+
+#EXTINF:-1 tvg-id="hitv2hd" group-title="HiTV" tvg-logo="https://github.com/thaiminhnguyen1999/HiTV/blob/gh-pages/img/logo/hitv2hd-logo.png?raw=true", HiTV 2 HD
+https://raw.githubusercontent.com/thaiminhnguyen1999/HiTV/m3u8/hitv-not_yet_broadcast.mp4/hitv-not_yet_broadcast.m3u8
+
+#EXTINF:-1 tvg-id="hitvcinemahd" group-title="HiTV" tvg-logo="https://github.com/thaiminhnguyen1999/HiTV/blob/gh-pages/img/logo/hitvcinemahd-logo.png?raw=true", HiTV Cinema HD
+https://raw.githubusercontent.com/thaiminhnguyen1999/HiTV/m3u8/hitv-not_yet_broadcast.mp4/hitv-not_yet_broadcast.m3u8
+
+#EXTINF:-1 tvg-id="hitvplushd" group-title="HiTV" tvg-logo="https://github.com/thaiminhnguyen1999/HiTV/blob/gh-pages/img/logo/hitvplushd-logo.png?raw=true", HiTV+ HD
+https://raw.githubusercontent.com/thaiminhnguyen1999/HiTV/m3u8/hitv-not_yet_broadcast.mp4/hitv-not_yet_broadcast.m3u8
