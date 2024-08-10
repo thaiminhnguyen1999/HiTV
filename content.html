@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HiTV - DataView - FileContent</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        pre {
+            white-space: pre-wrap;
+            /* Cho phép xuống dòng theo nội dung */
+            word-wrap: break-word;
+            /* Cho phép tự động xuống dòng */
+            background-color: #f4f4f4;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            /* Bo tròn góc */
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin-top: 10px;
+            border-radius: 10px;
+        }
+
+        a {
+            display: inline-block;
+            text-decoration: none;
+            color: #007bff;
+            border: 1px solid #007bff;
+            padding: 5px 10px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        a:hover {
+            background-color: #007bff;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <h1>HiTV - DataView - FileContent</h1>
+        <a id="downloadLink" href="#" download>Download</a>
+    </div>
+    <div id="content"></div>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const filePath = urlParams.get('file');
+        const contentDiv = document.getElementById('content');
+        const downloadLink = document.getElementById('downloadLink');
+
+        if (filePath) {
+            fetch(filePath)
+                .then(response => {
+                    const fileExtension = filePath.split('.').pop().toLowerCase();
+                    if (['jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp'].includes(fileExtension)) {
+                        return response.blob();
+                    } else {
+                        return response.text();
+                    }
+                })
+                .then(data => {
+                    const fileExtension = filePath.split('.').pop().toLowerCase();
+                    if (['jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp'].includes(fileExtension)) {
+                        const img = document.createElement('img');
+                        img.src = URL.createObjectURL(data);
+                        contentDiv.appendChild(img);
+                    } else {
+                        const pre = document.createElement('pre');
+                        pre.textContent = data;
+                        contentDiv.appendChild(pre);
+                    }
+                })
+                .catch(error => {
+                    contentDiv.textContent = "Error loading file content.";
+                });
+
+            downloadLink.href = filePath;
+        } else {
+            contentDiv.textContent = "No file specified.";
+        }
+    </script>
+</body>
+
+</html>
