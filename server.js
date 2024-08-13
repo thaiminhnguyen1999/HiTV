@@ -44,6 +44,20 @@ app.get('/file-tree', async (req, res) => {
     }
 });
 
+app.get('/test-token', async (req, res) => {
+    try {
+        const response = await fetch('https://api.github.com/user', {
+            headers: {
+                'Authorization': `token ${process.env.GITHUB_ACCESS_TOKEN}`
+            }
+        });
+        const data = await response.json();
+        res.json(data);
+    } catch (error) {
+        console.error('Error fetching user info:', error);
+        res.status(500).send('Error fetching user info');
+    }
+});
 
 
 function buildFileTree(items) {
