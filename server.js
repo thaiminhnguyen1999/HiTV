@@ -19,6 +19,8 @@ app.get('/file-tree', async (req, res) => {
             }
         });
 
+        console.log(`GitHub API response status: ${response.status} ${response.statusText}`);
+        
         if (!response.ok) {
             const errorDetails = await response.text();
             console.error(`GitHub API request failed: ${response.status} - ${response.statusText}\n${errorDetails}`);
@@ -35,6 +37,7 @@ app.get('/file-tree', async (req, res) => {
         res.status(500).send('Error fetching repository content');
     }
 });
+
 
 
 function buildFileTree(items) {
