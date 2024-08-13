@@ -8,6 +8,7 @@ const PORT = 3000;
 const GITHUB_REPO = 'https://api.github.com/repos/thaiminhnguyen1999/HiTV/contents/';
 const GITHUB_TOKEN = process.env.GITHUB_ACCESS_TOKEN;
 
+app.use(cors());
 app.use(express.static(__dirname));
 
 app.get('/file-tree', async (req, res) => {
