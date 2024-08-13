@@ -1,5 +1,5 @@
 const express = require('express');
-const fetch = require('node-fetch'); // Nếu bạn sử dụng Node.js 18+, fetch đã được tích hợp sẵn
+const fetch = require('node-fetch');
 const path = require('path');
 
 const app = express();
@@ -12,21 +12,30 @@ app.use(express.static(__dirname));
 
 app.get('/file-tree', async (req, res) => {
     try {
+        console.log('Fetching repository content from GitHub...');
         const response = await fetch(GITHUB_REPO, {
             headers: {
                 'Authorization': `token ${GITHUB_TOKEN}`
             }
         });
+
+        if (!response.ok) {
+            const errorDetails = await response.text();
+            console.error(`GitHub API request failed: ${response.status} - ${response.statusText}\n${errorDetails}`);
+            return res.status(response.status).send('Error fetching repository content from GitHub.');
+        }
+
         const data = await response.json();
 
         const filteredData = data.filter(file => !['index.html', 'content.html', 'server.js', 'package.json', 'package-lock.json'].includes(file.name));
 
         res.json(buildFileTree(filteredData));
     } catch (error) {
-        console.error('Error fetching repository content:', error);
+        console.error('Unexpected error fetching repository content:', error);
         res.status(500).send('Error fetching repository content');
     }
 });
+
 
 function buildFileTree(items) {
     const fileTree = {};
