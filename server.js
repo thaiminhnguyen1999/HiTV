@@ -1,9 +1,10 @@
 const express = require('express');
 const fetch = require('node-fetch');
 const path = require('path');
+const cors = require('cors');
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 const GITHUB_REPO = 'https://api.github.com/repos/thaiminhnguyen1999/HiTV/contents/';
 const GITHUB_TOKEN = process.env.GITHUB_ACCESS_TOKEN;
@@ -26,7 +27,7 @@ app.get('/file-tree', async (req, res) => {
         });
 
         console.log(`GitHub API response status: ${response.status} ${response.statusText}`);
-        
+
         if (!response.ok) {
             const errorDetails = await response.text();
             console.error(`GitHub API request failed: ${response.status} - ${response.statusText}\n${errorDetails}`);
@@ -35,6 +36,7 @@ app.get('/file-tree', async (req, res) => {
 
         const data = await response.json();
 
+        // Lọc ra các file và thư mục cần hiển thị
         const filteredData = data.filter(file => !['index.html', 'content.html', 'server.js', 'package.json', 'package-lock.json'].includes(file.name));
 
         res.json(buildFileTree(filteredData));
@@ -48,7 +50,7 @@ app.get('/test-token', async (req, res) => {
     try {
         const response = await fetch('https://api.github.com/user', {
             headers: {
-                'Authorization': `token ${process.env.GITHUB_ACCESS_TOKEN}`
+                'Authorization': `token ${GITHUB_TOKEN}`
             }
         });
         const data = await response.json();
@@ -58,7 +60,6 @@ app.get('/test-token', async (req, res) => {
         res.status(500).send('Error fetching user info');
     }
 });
-
 
 function buildFileTree(items) {
     const fileTree = {};
