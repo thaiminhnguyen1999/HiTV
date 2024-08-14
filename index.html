@@ -55,16 +55,15 @@
 </head>
 
 <body>
-
     <h2>HiTV - DataView</h2>
     <div id="fileTreeContainer">
         <ul id="fileTree"></ul>
     </div>
-
     <script>
         fetch('/file-tree')
             .then(response => response.json())
-            .then(data => createTreeView(data, document.getElementById('fileTree')));
+            .then(data => createTreeView(data, document.getElementById('fileTree')))
+            .catch(error => console.error('Error fetching file tree:', error));
 
         function createTreeView(tree, parent) {
             Object.keys(tree).forEach(key => {
@@ -93,24 +92,14 @@
             const sublist = this.querySelector('ul');
             if (sublist) {
                 sublist.classList.toggle('hidden');
-                adjustContainerSize();
                 event.stopPropagation();
             }
-        }
-
-        function adjustContainerSize() {
-            const container = document.getElementById('fileTreeContainer');
-            container.style.width = 'auto';
-            container.style.height = 'auto';
-            container.style.width = (container.scrollWidth + 15) + 'px';
-            container.style.height = (container.scrollHeight + 15) + 'px';
         }
 
         function redirectToContentPage(filepath) {
             window.location.href = `content.html?file=${encodeURIComponent(filepath)}`;
         }
     </script>
-
 </body>
 
 </html>
