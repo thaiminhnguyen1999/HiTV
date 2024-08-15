@@ -1,25 +1,17 @@
 {
-  "name": "hitv-dataview",
-  "version": "1.0.0",
-  "description": "",
-  "main": "fetch/file-tree.js",
+  "name": "tree-view",
+  "private": true,
+  "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/thaiminhnguyen1999/HiTV.git"
+  "devDependencies": {
+    "vite": "^5.4.0"
   },
-  "author": "HiTECH Corporation",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/thaiminhnguyen1999/HiTV/issues"
-  },
-  "homepage": "https://github.com/thaiminhnguyen1999/HiTV#readme",
   "dependencies": {
-    "cors": "^2.8.5",
-    "express": "^4.19.2",
-    "node-fetch": "^3.3.2"
+    "axios": "^1.7.4"
   }
 }

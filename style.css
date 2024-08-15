@@ -1,0 +1,113 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  width: 80%;
+  margin: auto;
+  overflow: hidden;
+}
+
+h1 {
+  text-align: center;
+  color: #333;
+  padding: 20px 0;
+}
+
+.directory-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.directory-item {
+  background: #fff;
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+}
+
+.directory-item img {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+}
+
+.directory-item a {
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+  flex: 1;
+}
+
+.directory-item a:hover {
+  color: #007BFF;
+}
+
+.file-info {
+  font-size: 0.9em;
+  color: #777;
+}
+
+.file-content {
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 40%;
+  height: 100%;
+  background: #fff;
+  border-left: 1px solid #ddd;
+  overflow-y: auto;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  z-index: 1000;
+}
+
+.file-content .close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 20px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  color: #333;
+}
+
+.file-content .close-btn:hover {
+  color: #ff0000;
+}
+
+.file-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.download-btn {
+  padding: 10px 15px;
+  background-color: #007BFF;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: 0.3s;
+  font-size: 18px;
+}
+
+.download-btn:hover {
+  background-color: #0056b3;
+  color: white;
+}
+
+#file-viewer {
+  white-space: pre-wrap;
+  font-family: monospace;
+  font-size: 14px;
+}

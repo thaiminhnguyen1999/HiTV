@@ -1,8 +1,0 @@
-{
-    "rewrites": [
-        {
-            "source": "/file-tree",
-            "destination": "/fetch/file-tree.js"
-        }
-    ]
-}
