@@ -13,16 +13,21 @@ export default async (req, res) => {
 
         if (!response.ok) {
             const errorDetails = await response.text();
+            console.log('Error details:', errorDetails); // Log lỗi chi tiết
             return res.status(response.status).send('Error fetching repository content from GitHub.');
         }
 
-        const data = await response.json();
-        const filteredData = data.filter(file =>
+        const data = await response.text(); // Lấy dữ liệu dưới dạng text
+        console.log('Raw Data:', data); // Log dữ liệu thô trước khi phân tích cú pháp
+        const jsonData = JSON.parse(data); // Phân tích cú pháp dữ liệu thô thành JSON
+
+        const filteredData = jsonData.filter(file =>
             !['api/file-tree.js', 'public/index.html', 'public/content.html', 'package.json', 'package-lock.json'].includes(file.path)
         );
 
         res.json(buildFileTree(filteredData));
     } catch (error) {
+        console.error('Error fetching or parsing repository content:', error); // Log lỗi
         res.status(500).send('Error fetching repository content');
     }
 };
