@@ -60,7 +60,7 @@
         <ul id="fileTree"></ul>
     </div>
     <script>
-        fetch('api/file-tree.js')
+        fetch('fetch/file-tree.js')
             .then(response => response.json())
             .then(data => createTreeView(data, document.getElementById('fileTree')))
             .catch(error => console.error('Error fetching file tree:', error));

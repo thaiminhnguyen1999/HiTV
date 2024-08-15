@@ -2,7 +2,7 @@
     "rewrites": [
         {
             "source": "/file-tree",
-            "destination": "/api/file-tree.js"
+            "destination": "/fetch/file-tree.js"
         }
     ]
 }

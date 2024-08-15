@@ -13,7 +13,7 @@ app.use(cors());
 
 app.use(express.static(__dirname));
 
-app.get('/api/file-tree.js', async (req, res) => {
+app.get('/fetch/file-tree.js', async (req, res) => {
     try {
         console.log('Fetching repository content from GitHub...');
         const response = await fetch(GITHUB_REPO, {

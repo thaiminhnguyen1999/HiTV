@@ -22,7 +22,7 @@ export default async (req, res) => {
         const jsonData = JSON.parse(data); // Phân tích cú pháp dữ liệu thô thành JSON
 
         const filteredData = jsonData.filter(file =>
-            !['api/file-tree.js', 'public/index.html', 'public/content.html', 'vercel.json', 'package.json', 'package-lock.json'].includes(file.path)
+            !['fetch/file-tree.js', 'public/index.html', 'public/content.html', 'vercel.json', 'package.json', 'package-lock.json'].includes(file.path)
         );
 
         res.json(buildFileTree(filteredData));
