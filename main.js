@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from 'https://cdn.jsdelivr.net/npm/axios@1.7.4/+esm';
 
 const repoUrl = 'https://api.github.com/repos/thaiminhnguyen1999/HiTV/contents/';
 
