@@ -55,6 +55,8 @@ h1 {
 }
 
 .file-content {
+  display: flex;
+  flex-direction: column;
   position: fixed;
   right: 0;
   top: 0;
@@ -68,24 +70,15 @@ h1 {
   z-index: 1000;
 }
 
-.file-content .close-btn {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  font-size: 20px;
-  cursor: pointer;
-  background: none;
-  border: none;
-  color: #333;
-}
-
-.file-content .close-btn:hover {
-  color: #ff0000;
+.file-content img {
+  max-width: 100%;
+  height: auto;
 }
 
 .file-header {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   margin-bottom: 20px;
   font-size: 18px;
   font-weight: bold;
@@ -99,6 +92,19 @@ h1 {
   border-radius: 5px;
   transition: 0.3s;
   font-size: 18px;
+  border: none;
+  cursor: pointer;
+}
+
+.close-btn {
+  padding: 10px 15px;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: 0.3s;
+  font-size: 18px;
+  border: none;
+  cursor: pointer;
 }
 
 .download-btn:hover {
@@ -106,8 +112,25 @@ h1 {
   color: white;
 }
 
-#file-viewer {
-  white-space: pre-wrap;
-  font-family: monospace;
-  font-size: 14px;
+.close-btn img {
+  width: 20px;
+  height: 20px;
+  vertical-align: middle;
+}
+
+.md-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.md-formatted {
+  width: 70%;
+  padding-right: 10px;
+}
+
+.md-raw {
+  width: 30%;
+  background-color: #f9f9f9;
+  border-left: 1px solid #ddd;
+  padding-left: 10px;
 }

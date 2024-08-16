@@ -1,0 +1,12 @@
+{
+    "projectFiles": [
+        "index.html",
+        "favicon.ico",
+        "main.js",
+        "package.json",
+        "package-lock.json",
+        "style.css",
+        "vite.config.js",
+        "icon/"
+    ]
+}

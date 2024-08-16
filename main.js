@@ -21,7 +21,7 @@ function displayContents(contents, currentPath) {
 
       const icon = document.createElement('img');
       icon.className = item.type === 'dir' ? 'folder-icon' : 'file-icon';
-      icon.src = item.type === 'dir' ? '/folder-icon.svg' : '/file-icon.svg';
+      icon.src = item.type === 'dir' ? '/icon/folder-icon.svg' : getFileIcon(item.name);
 
       const link = document.createElement('a');
       link.textContent = item.name;
@@ -52,6 +52,13 @@ function displayContents(contents, currentPath) {
   });
 }
 
+function getFileIcon(fileName) {
+  if (fileName.endsWith('.md')) return '/icon/md-icon.svg';
+  if (fileName.match(/\.(png|jpg|jpeg|gif|svg|ico)$/)) return '/icon/image-icon.svg';
+  if (fileName.match(/\.(mp4|webm|ogg|m3u8|m4v|mpeg|dash)$/)) return '/icon/video-icon.svg';
+  return '/icon/file-icon.svg';
+}
+
 function showFileContent(file) {
   const existingContentArea = document.querySelector('.file-content');
   if (existingContentArea) {
@@ -60,27 +67,81 @@ function showFileContent(file) {
 
   const contentArea = document.createElement('div');
   contentArea.className = 'file-content';
-  contentArea.innerHTML = `
-        <button class="close-btn">X</button>
-        <div class="file-header">
-            <span>Content of <strong>${file.name}</strong></span>
-            <a href="${file.download_url}" class="download-btn">Download</a>
-        </div>
-        <pre id="file-viewer"></pre>
-    `;
 
-  document.body.appendChild(contentArea);
+  const fileHeader = document.createElement('div');
+  fileHeader.className = 'file-header';
 
-  document.querySelector('.close-btn').addEventListener('click', () => {
+  const fileTitle = document.createElement('span');
+  fileTitle.innerHTML = `Content of <strong>${file.name}</strong>`;
+
+  const downloadBtn = document.createElement('a');
+  downloadBtn.className = 'download-btn';
+  downloadBtn.href = file.download_url;
+  downloadBtn.textContent = 'Download';
+
+  const closeBtn = document.createElement('button');
+  closeBtn.className = 'close-btn';
+  closeBtn.innerHTML = '<img src="/icon/close-icon.svg" alt="Close">';
+
+  closeBtn.addEventListener('click', () => {
     contentArea.remove();
   });
 
-  fetch(file.download_url)
-    .then(response => response.text())
-    .then(data => {
-      const fileViewer = document.getElementById('file-viewer');
-      fileViewer.textContent = data;
-    });
+  fileHeader.appendChild(fileTitle);
+  fileHeader.appendChild(downloadBtn);
+  fileHeader.appendChild(closeBtn);
+
+  contentArea.appendChild(fileHeader);
+
+  const fileViewer = document.createElement('pre');
+  fileViewer.id = 'file-viewer';
+
+  if (file.name.endsWith('.md')) {
+    const mdContainer = document.createElement('div');
+    mdContainer.className = 'md-container';
+
+    const formattedContent = document.createElement('div');
+    formattedContent.className = 'md-formatted';
+    fetch(file.download_url)
+      .then(response => response.text())
+      .then(data => {
+        formattedContent.innerHTML = marked(data);
+      });
+
+    const rawContent = document.createElement('pre');
+    rawContent.className = 'md-raw';
+    fetch(file.download_url)
+      .then(response => response.text())
+      .then(data => {
+        rawContent.textContent = data;
+      });
+
+    mdContainer.appendChild(formattedContent);
+    mdContainer.appendChild(rawContent);
+    contentArea.appendChild(mdContainer);
+
+  } else if (file.name.match(/\.(png|jpg|jpeg|gif|svg|ico)$/)) {
+    const img = document.createElement('img');
+    img.src = file.download_url;
+    contentArea.appendChild(img);
+
+  } else if (file.name.match(/\.(mp4|webm|ogg|m3u8|m4v|mpeg|dash)$/)) {
+    const video = document.createElement('video');
+    video.src = file.download_url;
+    video.controls = true;
+    contentArea.appendChild(video);
+
+  } else {
+    fetch(file.download_url)
+      .then(response => response.text())
+      .then(data => {
+        fileViewer.textContent = data;
+      });
+
+    contentArea.appendChild(fileViewer);
+  }
+
+  document.body.appendChild(contentArea);
 }
 
 fetchRepoContents();
